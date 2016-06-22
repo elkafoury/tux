@@ -53,8 +53,12 @@ public class TGConfigDefaults{
 		this.loadProperty(TGConfigKeys.WINDOW_TITLE,"${appname} - ${filename}");
 		this.loadProperty(TGConfigKeys.SHOW_SPLASH,true);
 		this.loadProperty(TGConfigKeys.MAXIMIZED,false);
-		this.loadProperty(TGConfigKeys.WIDTH,800);
-		this.loadProperty(TGConfigKeys.HEIGHT,600);
+	// elkafoury width test 3
+		
+		this.loadProperty(TGConfigKeys.WIDTH,480);
+		this.loadProperty(TGConfigKeys.HEIGHT,320);
+//		this.loadProperty(TGConfigKeys.WIDTH,800);
+//		this.loadProperty(TGConfigKeys.HEIGHT,600);
 		this.loadProperty(TGConfigKeys.SHOW_MIXER,false);
 		this.loadProperty(TGConfigKeys.SHOW_TRANSPORT,false);
 		this.loadProperty(TGConfigKeys.SHOW_FRETBOARD,false);

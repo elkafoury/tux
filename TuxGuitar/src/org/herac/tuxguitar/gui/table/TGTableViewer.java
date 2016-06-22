@@ -1,6 +1,7 @@
 package org.herac.tuxguitar.gui.table;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseAdapter;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
@@ -21,11 +22,15 @@ import org.herac.tuxguitar.gui.editors.TGUpdateListener;
 import org.herac.tuxguitar.gui.editors.TablatureEditor;
 import org.herac.tuxguitar.gui.editors.tab.TGMeasureImpl;
 import org.herac.tuxguitar.gui.editors.tab.TGTrackImpl;
+import org.herac.tuxguitar.gui.mixer.TGMixer;
+import org.herac.tuxguitar.gui.mixer.TGMixerTrack;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.gui.system.language.LanguageLoader;
+import org.herac.tuxguitar.gui.undo.undoables.track.UndoableTrackSoloMute;
 import org.herac.tuxguitar.player.base.MidiInstrument;
 import org.herac.tuxguitar.song.models.TGBeat;
 import org.herac.tuxguitar.song.models.TGMeasure;
+import org.herac.tuxguitar.song.models.TGSong;
 import org.herac.tuxguitar.song.models.TGTrack;
 
 public class TGTableViewer implements TGRedrawListener, TGUpdateListener, LanguageLoader{
@@ -123,6 +128,24 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 	public TGTable getTable(){
 		return this.table;
 	}
+	//elkafoury
+	public void setsCompositeVisible(boolean show){
+		 this.table.setsCompositeVisible(show);
+	}
+	
+	//elkafoury
+	public ScrolledComposite getsComposite(){
+		return  this.table.getsComposite();
+	}
+	//elkafoury
+	public boolean isTGVisible(){
+		return this.table.getsComposite().isVisible();
+	}
+	
+	
+	
+	
+	
 	
 	public int getHScrollSelection(){
 		return this.hSroll.getSelection();
@@ -258,7 +281,27 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 			this.selectedTrack = selectedTrack;
 			this.selectedMeasure = 0;
 			this.updateHScroll();
+
+			// elkafoury mute other tracks, play only the selected so light do not get mixed up.
+			TGSong song = TuxGuitar.instance().getSongManager().getSong();
+			int tracks = song.countTracks();
+			for( int i = 0; i < tracks; i ++){
+				TGTrack itrack = song.getTrack(i);
+					if(itrack.getNumber()!=selectedTrack ){
+					//	itrack.setMute(true);
+						TuxGuitar.instance().getSongManager().getTrackManager().changeSolo(itrack,false);
+					}else{
+						//itrack.setMute(false);
+						TuxGuitar.instance().getSongManager().getTrackManager().changeSolo(itrack,true);
+					}
+			}
 			
+			// elkafoury this part is important so it will switch to the selected track while playing.
+			if (TuxGuitar.instance().getPlayer().isRunning()) {
+				TuxGuitar.instance().getPlayer().updateControllers();
+			}
+
+
 			if(this.followScroll){
 				this.followHorizontalScroll(getEditor().getTablature().getCaret().getMeasure().getNumber());
 				this.followScroll = false;
@@ -274,6 +317,28 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 				this.updateTable();
 				int selectedTrack = measure.getTrack().getNumber();
 				int selectedMeasure = measure.getNumber();
+				
+				
+				
+
+
+
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+			
 				if(this.selectedTrack != selectedTrack || this.selectedMeasure != selectedMeasure){
 					this.redrawRows(selectedTrack);
 					this.followHorizontalScroll(selectedMeasure);

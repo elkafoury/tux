@@ -10,6 +10,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.herac.tuxguitar.gui.TuxGuitar;
 
 public class TGTable {
 	private ScrolledComposite sComposite;
@@ -30,6 +31,7 @@ public class TGTable {
 	}
 	
 	public void newTable(Composite parent){
+		// ELKAFOURY down track table
 		this.sComposite = new ScrolledComposite(parent,SWT.BORDER | SWT.V_SCROLL);
 		this.sComposite.setLayout(new GridLayout());
 		this.sComposite.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
@@ -55,6 +57,18 @@ public class TGTable {
 		
 		this.sComposite.setContent(this.table);
 	}
+	
+	// elkafoury test we do not need this any more
+	public void setsCompositeVisible (boolean show){
+		this.sComposite.setVisible(show);
+	}
+	public boolean issCompositeVisible(){
+		return this.sComposite.isVisible();
+	}
+	public ScrolledComposite getsComposite(){
+		return this.sComposite;
+	}
+
 	
 	public Composite getControl(){
 		return this.table;

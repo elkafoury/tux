@@ -8,6 +8,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Path;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
+import org.eclipse.swt.widgets.Shell;
 
 public class TGPainter {
 	
@@ -22,6 +23,8 @@ public class TGPainter {
 	private GC gc;
 	
 	private Path path;
+	
+	private Shell paintShell;
 	
 	public TGPainter(){
 		super();
@@ -83,6 +86,21 @@ public class TGPainter {
 	public void copyArea(Image image, int x, int y) {
 		this.gc.copyArea(image, x, y);
 	}
+	public void copyArea(int srcX, int srcY, int width, int height, int destX, int destY) {
+		this.gc.copyArea(srcX, srcY, width, height, destX, destY) ;
+	}
+	public Image createImage(Rectangle r) {
+		Image image = new Image(this.gc.getDevice(),r);
+		return image;
+	}
+	
+	
+	public Rectangle createRectangle(int x, int y, int width, int height) {
+		Rectangle r = new Rectangle( x, y,  width,  height);
+		return r;
+	}
+ 
+
 	
 	public Point getStringExtent(String string) {
 		this.setAdvanced(false);
@@ -151,11 +169,28 @@ public class TGPainter {
 		this.path.addRectangle(x, y, width, height);
 		this.pathEmpty = false;
 	}
+	public void drawLine(int x,int y,int width,int height) {
+		this.gc.setLineWidth(10);
+		 this.gc.drawLine(x, y, x, y+height);
+		// this.dispose();
+	}
+	
+	
+	
+	public void fillRectangle(int x,int y,int width,int height) {
+		//this.gc.setXORMode(true);
+		this.gc.fillRectangle(x,y,width, height);
+		//this.dispose();
+	}
+	
+	
 	
 	public void addRectangle(Rectangle rectangle) {
 		this.path.addRectangle(rectangle.x,rectangle.y,rectangle.width,rectangle.height);
 		this.pathEmpty = false;
 	}
+	
+	
 	
 	public void setBackground(Color arg0) {
 		this.gc.setBackground(arg0);
@@ -192,4 +227,6 @@ public class TGPainter {
 			this.gc.setAdvanced(advanced);
 		}
 	}
+
+
 }

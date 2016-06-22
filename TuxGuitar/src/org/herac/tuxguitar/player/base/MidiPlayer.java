@@ -523,11 +523,13 @@ public class MidiPlayer{
 		int phaser = track.getChannel().getPhaser();
 		int tremolo = track.getChannel().getTremolo();
 		int size = notes.size();
-		int[][] beat = new int[size][2];
+	//	int[][] beat = new int[size][2];
+		int[][] beat = new int[size][3];  // added the  note channel
 		for(int i = 0; i < size; i ++){
 			TGNote note = (TGNote)notes.get(i);
 			beat[i][0] = track.getOffset() + (note.getValue() + ((TGString)track.getStrings().get(note.getString() - 1)).getValue());
 			beat[i][1] = note.getVelocity();
+			beat[i][2] =note.getString() ;// elkafoury
 		}
 		playBeat(channel,program,volume,balance,chorus,reverb,phaser,tremolo,beat);
 	}
@@ -547,7 +549,15 @@ public class MidiPlayer{
 			getOutputTransmitter().sendControlChange(channel,MidiControllers.TREMOLO,tremolo);
 				
 			for(int i = 0; i < beat.length; i ++){
-				getOutputTransmitter().sendNoteOn(channel,beat[i][0], beat[i][1]);
+				getOutputTransmitter().sendNoteOn(
+						
+						// elkafoury
+					//	channel
+						
+						beat[i][2]
+						
+						
+						,beat[i][0], beat[i][1]);
 				if(interval > 0){
 					Thread.sleep(interval);
 				}

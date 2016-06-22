@@ -250,7 +250,7 @@ public class Tablature extends Composite {
 							getViewLayout().paintPlayMode(painter, this.playedMeasure, this.playedBeat,paintMeasure);
 						}
 						if(!measure.isOutOfBounds()){
-							getViewLayout().paintPlayMode(painter, measure, beat,paintMeasure);
+							getViewLayout().paintPlayMode(painter, measure, beat,paintMeasure);// elkafoury this is the line that colors the notes on playing
 						}
 						this.playedBeat = beat;
 						this.playedMeasure =  measure;

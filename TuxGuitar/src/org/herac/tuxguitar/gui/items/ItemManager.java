@@ -91,7 +91,8 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 	}
 	
 	public void loadItems(){
-		this.createMenu();
+		// elkafoury remove menu
+	 	this.createMenu();
 		this.createPopupMenu();
 		this.createCoolbar();
 	}
@@ -257,18 +258,20 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 		}
 		
 		this.loadedMenuItems.clear();
-		this.loadedMenuItems.add(new FileMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new EditMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new ViewMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new CompositionMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new TrackMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new MeasureMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new BeatMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new MarkerMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new TransportMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new ToolMenuItem(shell,this.menu, SWT.CASCADE));
-		this.loadedMenuItems.add(new HelpMenuItem(shell,this.menu, SWT.CASCADE));
-		this.showMenuItems(this.loadedMenuItems);
+		//elkafoury menu remove
+//		this.loadedMenuItems.add(new FileMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new EditMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new ViewMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new CompositionMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new TrackMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new MeasureMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new BeatMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new MarkerMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new TransportMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new ToolMenuItem(shell,this.menu, SWT.CASCADE));
+//		this.loadedMenuItems.add(new HelpMenuItem(shell,this.menu, SWT.CASCADE));
+		// elkafoury remove the menu
+	 	this.showMenuItems(this.loadedMenuItems);
 		shell.setMenuBar(this.menu);
 	}
 	
@@ -403,19 +406,20 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 	
 	public void setDefaultToolBars(){
 		this.toolItems = new ToolItems[]{
+				// elkafoury remove items from toolbar options
 				initToolItem(new FileToolItems(), true),
-				initToolItem(new EditToolItems(), true),
-				initToolItem(new PropertiesToolItems(), true),
-				initToolItem(new TrackToolItems(), true),
-				initToolItem(new DurationToolItems(), true),
-				initToolItem(new BeatToolItems(), true),
-				initToolItem(new CompositionToolItems(), true),
+//				initToolItem(new EditToolItems(), true),
+//				initToolItem(new PropertiesToolItems(), true),
+//				initToolItem(new TrackToolItems(), true),
+//				initToolItem(new DurationToolItems(), true),
+//				initToolItem(new BeatToolItems(), true),
+ 				initToolItem(new CompositionToolItems(), true),
 				initToolItem(new TransportToolItems(), true),
 				initToolItem(new MarkerToolItems(), true),
 				initToolItem(new LayoutToolItems(), true),
 				initToolItem(new ViewToolItems(), true),
-				initToolItem(new NoteEffectToolItems(), true),
-				initToolItem(new DynamicToolItems(), true),
+			//	initToolItem(new NoteEffectToolItems(), true),
+			//	initToolItem(new DynamicToolItems(), true),
 		};
 		this.shouldReloadToolBars = true;
 	}

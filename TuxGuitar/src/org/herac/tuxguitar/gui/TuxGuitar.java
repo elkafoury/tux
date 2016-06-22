@@ -270,10 +270,25 @@ public class TuxGuitar {
 		this.sashComposite.setLayout(new FormLayout());
 		this.sashComposite.setLayoutData(data);
 		
+		//table
+		data = new FormData();
+		data.left = new FormAttachment(0,0);
+		data.right = new FormAttachment(70,0);
+		data.top = new FormAttachment(getItemManager().getCoolbar(),0);
+		data.bottom = new FormAttachment(50,0);
+		getTable().init(this.sashComposite);
+		getTable().getComposite().setLayoutData(data);
+		// elkafoury hide tracks on startup
+		getTable().getComposite().setVisible(false);
+		
+		// tab and score canvas
 		data = new FormData();
 		data.left = new FormAttachment(0,0);
 		data.right = new FormAttachment(100,0);
-		data.bottom = new FormAttachment(100,-150);
+	 //	data.top = new FormAttachment(getTable().getComposite(),130);
+	//	data.top = new FormAttachment(getItemManager().getCoolbar(),130);
+		data.bottom = new FormAttachment(100,0);
+		
 		data.height = MARGIN_WIDTH;
 		this.sash = new Sash(this.sashComposite, SWT.HORIZONTAL);
 		this.sash.setLayoutData(data);
@@ -286,13 +301,7 @@ public class TuxGuitar {
 		getTablatureEditor().showTablature(this.sashComposite);
 		getTablatureEditor().getTablature().setLayoutData(data);
 		
-		data = new FormData();
-		data.left = new FormAttachment(0,0);
-		data.right = new FormAttachment(100,0);
-		data.top = new FormAttachment(this.sash,0);
-		data.bottom = new FormAttachment(100,0);
-		getTable().init(this.sashComposite);
-		getTable().getComposite().setLayoutData(data);
+
 		
 		data = new FormData();
 		data.left = new FormAttachment(0,0);
@@ -349,7 +358,10 @@ public class TuxGuitar {
 				getShell().setSize(width,height);
 			}
 		}
-		getShell().setMinimumSize(640,480);
+		// elkafoury window size window width window height
+		getShell().setMinimumSize(455,480);
+		//getShell().setMinimumSize(640,480);
+		//getShell().setMinimumSize(180,120);
 		//---Fretboard---
 		if(config.getBooleanConfigValue(TGConfigKeys.SHOW_FRETBOARD)){
 			getFretBoardEditor().showFretBoard();
@@ -412,8 +424,14 @@ public class TuxGuitar {
 	public void updateShellFooter(int offset,int minimumWith,int minimumHeight){
 		FormData data = ((FormData)this.sashComposite.getLayoutData());
 		data.bottom.offset = -offset;
-		getShell().setMinimumSize(Math.max(640,minimumWith),Math.max(480,minimumHeight));
+		//elkafoury width
+		//getShell().setMinimumSize(Math.max(455,minimumWith),Math.max(480,minimumHeight));
+		//getShell().setMinimumSize(Math.max(640,minimumWith),Math.max(480,minimumHeight));
 		getShell().layout(true,true);
+		getShell().redraw();
+	}
+	// elkafoury
+	public void redrawShell(){
 		getShell().redraw();
 	}
 	
@@ -651,7 +669,7 @@ public class TuxGuitar {
 		if(!isDisposed() && !this.isLocked()){
 			this.lock();
 			this.getEditorCache().updatePlayMode();
-			this.getEditorManager().doRedraw( this.getEditorCache().shouldRedraw() ? TGRedrawListener.PLAYING_NEW_BEAT : TGRedrawListener.PLAYING_THREAD );
+			this.getEditorManager().doRedraw( this.getEditorCache().shouldRedraw() ? TGRedrawListener.PLAYING_NEW_BEAT : TGRedrawListener.PLAYING_THREAD );// elkfoury this line changes note color on play
 			this.unlock();
 		}
 	}

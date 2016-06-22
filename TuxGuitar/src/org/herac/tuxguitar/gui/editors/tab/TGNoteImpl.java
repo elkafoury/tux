@@ -8,6 +8,7 @@ package org.herac.tuxguitar.gui.editors.tab;
 
 import java.util.Iterator;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.Rectangle;
 import org.herac.tuxguitar.gui.editors.TGPainter;
@@ -21,6 +22,11 @@ import org.herac.tuxguitar.song.models.TGNote;
 import org.herac.tuxguitar.song.models.TGNoteEffect;
 import org.herac.tuxguitar.song.models.TGVoice;
 import org.herac.tuxguitar.song.models.effects.TGEffectHarmonic;
+
+
+
+import org.eclipse.swt.graphics.Image;// elkafoury
+
 
 /**
  * @author julian
@@ -37,11 +43,41 @@ public class TGNoteImpl extends TGNote {
 	
 	private int accidental;
 	
+	private Image imgCopy;
+	
+	private boolean isPlayed;
+	
+
+	
 	public TGNoteImpl(TGFactory factory) {
 		super(factory);
 		this.noteOrientation = new Rectangle(0,0,0,0);
+		setIsPlayed(false);
+	}
+	public void setImage(Image imgcopy) {
+		this.imgCopy =imgcopy;
+	}
+	public Image getImage() {
+		return this.imgCopy;
 	}
 	
+	public void setIsPlayed(boolean p) {
+		this.isPlayed =p;
+	} 
+	
+
+	public boolean getIsPlayed() {
+		return this.isPlayed;
+	}
+//	public void setCurrentX(int p) {
+//		this.currentX=p;
+//	} 
+//	
+//	public int getCurrentX() {
+//		return this.currentX;
+//	}
+	
+
 	/**
 	 * Actualiza los valores para dibujar
 	 */
@@ -54,13 +90,27 @@ public class TGNoteImpl extends TGNote {
 	/**
 	 * Pinta la nota
 	 */
-	public void paint(ViewLayout layout,TGPainter painter, int fromX, int fromY) {
-		int spacing = getBeatImpl().getSpacing();
-		paintScoreNote(layout, painter, fromX, fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES),spacing);
+	public void paint(ViewLayout layout,TGPainter painter, int fromX, int fromY,boolean firstNote) {
+	
+		int spacing = getBeatImpl().getSpacing();  
+	 // paintScoreNoteLocBar(layout, painter, fromX, fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES),spacing);
+		
+	  paintScoreNote(layout, painter, fromX, fromY + getPaintPosition(TGTrackSpacing.POSITION_SCORE_MIDDLE_LINES),spacing,  firstNote);
+//	 try {
+//		    Thread.sleep(100);
+//		} catch(InterruptedException ex) {
+//		    Thread.currentThread().interrupt();
+//		}
+	
+		
 		if(!layout.isPlayModeEnabled()){
 			paintOfflineEffects(layout, painter,fromX,fromY, spacing);
 		}
 		paintTablatureNote(layout, painter, fromX, fromY + getPaintPosition(TGTrackSpacing.POSITION_TABLATURE),spacing);
+		
+		
+		
+	
 	}
 	
 	private void paintOfflineEffects(ViewLayout layout,TGPainter painter,int fromX, int fromY, int spacing){		
@@ -144,8 +194,9 @@ public class TGNoteImpl extends TGNote {
 			this.noteOrientation.y = y;
 			this.noteOrientation.width = 1;
 			this.noteOrientation.height = 1;
-			
-			layout.setTabNoteStyle(painter, (layout.isPlayModeEnabled() && getBeatImpl().isPlaying(layout)));
+			boolean playing = (layout.isPlayModeEnabled() && getBeatImpl().isPlaying(layout)) ;
+			layout.setTabNoteStyle(painter, playing);
+
 			//-------------ligadura--------------------------------------
 			if (isTiedNote() && (style & ViewLayout.DISPLAY_SCORE) == 0) {
 				float tX = 0;
@@ -176,7 +227,8 @@ public class TGNoteImpl extends TGNote {
 				this.noteOrientation.height = r.height;
 				String visualNote = (getEffect().isDeadNote())?"X":Integer.toString(getValue());
 				visualNote = (getEffect().isGhostNote())?"(" + visualNote + ")":visualNote;
-				painter.drawString(visualNote, this.noteOrientation.x, this.noteOrientation.y);
+			 	painter.drawString(visualNote, this.noteOrientation.x, this.noteOrientation.y);
+			 
 			}
 			
 			//-------------efectos--------------------------------------
@@ -210,7 +262,41 @@ public class TGNoteImpl extends TGNote {
 	/**
 	 * Pinta la nota en la partitura
 	 */
-	private void paintScoreNote(ViewLayout layout,TGPainter painter, int fromX, int fromY, int spacing) {
+	// elkafoury draw score notes on editing
+	private void paintScoreNoteLocBar(ViewLayout layout, TGPainter painter, int x, int yfrom, boolean playing, boolean firstNote) {
+
+		layout.setScoreNoteStyle(painter, playing);
+
+		// int w=layout.getScoreLineSpacing() * 22;
+		// int w=layout.getScoreSpacing()*3;
+		// int w=layout.getTrackPositionAt(y).getHeight();
+		// float scale = layout.getScale();
+		// int move = (int)((8f - getMeasureImpl().getTrack().stringCount()) *
+		// scale);
+		// int y1 = (y - move);
+		// int y2 = ((y + getMeasureImpl().getTrackImpl().getTabHeight()) ) +
+		// move;
+		// h=((y + getMeasureImpl().getTrackImpl().getTabHeight()) );
+		// painter.setBackground(layout.getResources().getColorBlue()); //
+		// disabled for now
+		// painter.setForeground(layout.getResources().getColorBlue()); //&&
+		// getBeatImpl().isThreadPlaying(layout)
+		// painter.setBackground(layout.getResources().getColorWhite());
+		// painter.setForeground(layout.getResources().getColorBlack());
+		int yc = yfrom - 30;
+		int h = getMeasureImpl().getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE);
+				if (playing && firstNote) {
+					this.imgCopy = painter.createImage(painter.createRectangle(x - 2, yc, 10, h));
+					painter.copyArea(this.imgCopy, x - 2, yc);
+					painter.setAlpha(100);
+					painter.fillRectangle(x - 2, yc, 10, h);
+					setIsPlayed(true);
+				} else if (this.getIsPlayed()) {
+					painter.drawImage(this.imgCopy, x - 2, yc);
+				}
+	}
+
+	private void paintScoreNote(ViewLayout layout,TGPainter painter, int fromX, int fromY, int spacing, boolean firstNote) {
 		if((layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ){
 			float scale = layout.getScoreLineSpacing();
 			int direction = getVoiceImpl().getBeatGroup().getDirection();
@@ -221,10 +307,8 @@ public class TGNoteImpl extends TGNote {
 			int y1 = ( fromY + getScorePosY() ) ;
 			
 			//-------------foreground--------------------------------------
-			boolean playing = (layout.isPlayModeEnabled() && getBeatImpl().isPlaying(layout));
-			
-			layout.setScoreNoteStyle(painter,playing);
-			
+		boolean playing = (layout.isPlayModeEnabled() && getBeatImpl().isPlaying(layout));
+		paintScoreNoteLocBar(layout, painter, x,fromY,playing,   firstNote);
 			//----------ligadura---------------------------------------
 			if (isTiedNote()) {
 				TGNoteImpl noteForTie = getNoteForTie();
@@ -272,8 +356,13 @@ public class TGNoteImpl extends TGNote {
 					painter.closePath();
 				}
 			}else{
-				if( layout.isBufferEnabled() ){
-					painter.drawImage(layout.getResources().getScoreNote(getVoice().getDuration().getValue(),playing),x,y1);
+				if( layout.isBufferEnabled() ){ 
+					
+				//	painter.drawImage(layout.getResources().getScoreNote(getVoice().getDuration().getValue(),playing),x,y1);// elkafoury this is the main line we need to change note
+					painter.drawImage(layout.getResources().getScoreNote(getVoice().getDuration().getValue(),false),x,y1);// elkafoury this is the main line we need to change note
+					
+			//		paintScoreNoteLocBar(layout, painter, x,fromY,playing,   firstNote);
+				
 				}else{
 					boolean full = (getVoice().getDuration().getValue() >= TGDuration.QUARTER);
 					painter.initPath((full ? TGPainter.PATH_FILL : TGPainter.PATH_DRAW));
@@ -331,7 +420,7 @@ public class TGNoteImpl extends TGNote {
 					}
 				}else{
 					//staccato
-					if (getEffect().isStaccato()) {
+					if (getEffect().isStaccato()) { 
 						int size = 3;
 						int sX = x + (layout.getResources().getScoreNoteWidth() / 2);
 						int sY = (fromY + getVoiceImpl().getBeatGroup().getMinNote().getScorePosY() + layout.getScoreLineSpacing()) + 2;
@@ -360,7 +449,6 @@ public class TGNoteImpl extends TGNote {
 			}
 		}
 	}
-	
 	/**
 	 * Encuentra la nota a la que esta ligada
 	 */

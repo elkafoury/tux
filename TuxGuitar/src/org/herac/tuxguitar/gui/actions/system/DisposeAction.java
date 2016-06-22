@@ -94,8 +94,14 @@ public class DisposeAction extends Action {
 		config.setProperty(TGConfigKeys.SHOW_TRANSPORT,!TuxGuitar.instance().getTransport().isDisposed());
 		config.setProperty(TGConfigKeys.SHOW_MARKERS,!MarkerList.instance().isDisposed());
 		config.setProperty(TGConfigKeys.MAXIMIZED,TuxGuitar.instance().getShell().getMaximized());
-		config.setProperty(TGConfigKeys.WIDTH,TuxGuitar.instance().getShell().getClientArea().width);
-		config.setProperty(TGConfigKeys.HEIGHT,TuxGuitar.instance().getShell().getClientArea().height);
+		// elkafoury width test
+		//config.setProperty(TGConfigKeys.WIDTH,TuxGuitar.instance().getShell().getClientArea().width);
+		config.setProperty(TGConfigKeys.WIDTH,480);
+		config.setProperty(TGConfigKeys.HEIGHT,320);
+		System.out.println("The client area with ya mimo  2:"+ TuxGuitar.instance().getShell().getClientArea().width );
+		System.out.println("The client area height ya mimo  2:"+ TuxGuitar.instance().getShell().getClientArea().height );
+	//	config.setProperty(TGConfigKeys.HEIGHT,TuxGuitar.instance().getShell().getClientArea().height);
+		
 		config.setProperty(TGConfigKeys.EDITOR_MOUSE_MODE,getEditor().getTablature().getEditorKit().getMouseMode());
 		config.setProperty(TGConfigKeys.MATRIX_GRIDS,TuxGuitar.instance().getMatrixEditor().getGrids());
 		

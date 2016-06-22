@@ -44,14 +44,14 @@ public class TransportModeAction extends Action {
 	protected static final int MAX_SELECTION = 500;
 	protected static final int[] DEFAULT_PERCENTS = new int[]{25,50,75,100,125,150,175,200};
 	
-	protected Button simple;
+//	protected Button simple;
 	protected Button simpleLoop;
 	protected Combo simplePercent;
 	
-	protected Button custom;
-	protected Spinner customFrom;
-	protected Spinner customTo;
-	protected Spinner customIncrement;
+//	protected Button custom;
+//	protected Spinner customFrom;
+//	protected Spinner customTo;
+//	protected Spinner customIncrement;
 	
 	protected MHeaderCombo loopSHeader;
 	protected MHeaderCombo loopEHeader;
@@ -77,18 +77,18 @@ public class TransportModeAction extends Action {
 		radios.setLayoutData(getMainData());
 		
 		//---Simple---
-		this.simple = new Button(radios, SWT.RADIO);
-		this.simple.setText(TuxGuitar.getProperty("transport.mode.simple"));
-		this.simple.setSelection(mode.getType() == MidiPlayerMode.TYPE_SIMPLE);
-		RadioSelectionAdapter simpleAdapter = new RadioSelectionAdapter(this.simple);
+//		this.simple = new Button(radios, SWT.RADIO);
+//		this.simple.setText(TuxGuitar.getProperty("transport.mode.simple"));
+//		this.simple.setSelection(mode.getType() == MidiPlayerMode.TYPE_SIMPLE);
+		RadioSelectionAdapter simpleAdapter = new RadioSelectionAdapter( );
 		
 		Group simpleGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
 		simpleGroup.setLayout(new GridLayout(2,false));
 		simpleGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		simpleGroup.setText(TuxGuitar.getProperty("transport.mode.simple"));
+	//	simpleGroup.setText(TuxGuitar.getProperty("transport.mode.simple"));
 		simpleAdapter.addControl(simpleGroup);
 		
-		simpleAdapter.addControl(makeLabel(simpleGroup, TuxGuitar.getProperty("transport.mode.simple.tempo-percent"),SWT.LEFT,1));
+	//	simpleAdapter.addControl(makeLabel(simpleGroup, TuxGuitar.getProperty("transport.mode.simple.tempo-percent"),SWT.LEFT,1));
 		this.simplePercent = new Combo(simpleGroup, SWT.DROP_DOWN | SWT.READ_ONLY);
 		this.simplePercent.setLayoutData(new GridData(SWT.FILL,SWT.FILL,true,true));
 		for(int i = 0; i < DEFAULT_PERCENTS.length; i ++){
@@ -109,51 +109,51 @@ public class TransportModeAction extends Action {
 		this.simpleLoop.setLayoutData(loopedData);
 		
 		//---Trainer---
-		this.custom = new Button(radios, SWT.RADIO);
-		this.custom.setText(TuxGuitar.getProperty("transport.mode.trainer"));
-		this.custom.setSelection(mode.getType() == MidiPlayerMode.TYPE_CUSTOM);
-		RadioSelectionAdapter customAdapter = new RadioSelectionAdapter(this.custom);
+//		this.custom = new Button(radios, SWT.RADIO);
+//		this.custom.setText(TuxGuitar.getProperty("transport.mode.trainer"));
+//		this.custom.setSelection(mode.getType() == MidiPlayerMode.TYPE_CUSTOM);
+//		RadioSelectionAdapter customAdapter = new RadioSelectionAdapter(this.custom);
+//		
+//		Group trainerGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
+//		trainerGroup.setLayout(new GridLayout(6,false));
+//		trainerGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+//		trainerGroup.setText(TuxGuitar.getProperty("transport.mode.trainer"));
+//		customAdapter.addControl(trainerGroup);
 		
-		Group trainerGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
-		trainerGroup.setLayout(new GridLayout(6,false));
-		trainerGroup.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		trainerGroup.setText(TuxGuitar.getProperty("transport.mode.trainer"));
-		customAdapter.addControl(trainerGroup);
+//		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("composition.tempo"),SWT.LEFT,1));
+//		this.customFrom = new Spinner(trainerGroup,SWT.BORDER);
+//		this.customFrom.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+//		this.customFrom.setMinimum(MIN_SELECTION);
+//		this.customFrom.setMaximum(MAX_SELECTION);
+//		this.customFrom.setSelection(mode.getCustomPercentFrom());
+//		customAdapter.addControl(this.customFrom);
+//		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
+//		
+//		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("edit.to"),SWT.RIGHT,1));
+//		this.customTo = new Spinner(trainerGroup,SWT.BORDER);
+//		this.customTo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+//		this.customTo.setMinimum(MIN_SELECTION);
+//		this.customTo.setMaximum(MAX_SELECTION);
+//		this.customTo.setSelection(mode.getCustomPercentTo());
+//		customAdapter.addControl(this.customTo);
+//		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
+//		
+//		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("transport.mode.trainer.increment-description"),SWT.LEFT,4));
+//		this.customIncrement = new Spinner(trainerGroup,SWT.BORDER);
+//		this.customIncrement.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
+//		this.customIncrement.setMinimum(MIN_SELECTION);
+//		this.customIncrement.setMaximum(MAX_SELECTION);
+//		this.customIncrement.setSelection(mode.getCustomPercentIncrement());
+//		customAdapter.addControl(this.customIncrement);
+//		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
 		
-		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("composition.tempo"),SWT.LEFT,1));
-		this.customFrom = new Spinner(trainerGroup,SWT.BORDER);
-		this.customFrom.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		this.customFrom.setMinimum(MIN_SELECTION);
-		this.customFrom.setMaximum(MAX_SELECTION);
-		this.customFrom.setSelection(mode.getCustomPercentFrom());
-		customAdapter.addControl(this.customFrom);
-		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
-		
-		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("edit.to"),SWT.RIGHT,1));
-		this.customTo = new Spinner(trainerGroup,SWT.BORDER);
-		this.customTo.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		this.customTo.setMinimum(MIN_SELECTION);
-		this.customTo.setMaximum(MAX_SELECTION);
-		this.customTo.setSelection(mode.getCustomPercentTo());
-		customAdapter.addControl(this.customTo);
-		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
-		
-		customAdapter.addControl(makeLabel(trainerGroup, TuxGuitar.getProperty("transport.mode.trainer.increment-description"),SWT.LEFT,4));
-		this.customIncrement = new Spinner(trainerGroup,SWT.BORDER);
-		this.customIncrement.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true));
-		this.customIncrement.setMinimum(MIN_SELECTION);
-		this.customIncrement.setMaximum(MAX_SELECTION);
-		this.customIncrement.setSelection(mode.getCustomPercentIncrement());
-		customAdapter.addControl(this.customIncrement);
-		customAdapter.addControl(makeLabel(trainerGroup, "%",SWT.LEFT,1));
-		
-		SpinnerSelectionAdapter spinnerAdapter = new SpinnerSelectionAdapter(this.customFrom,this.customTo,this.customIncrement);
-		this.customFrom.addSelectionListener(spinnerAdapter);
-		this.customTo.addSelectionListener(spinnerAdapter);
-		this.customIncrement.addSelectionListener(spinnerAdapter);
+//		SpinnerSelectionAdapter spinnerAdapter = new SpinnerSelectionAdapter(this.customFrom,this.customTo,this.customIncrement);
+//		this.customFrom.addSelectionListener(spinnerAdapter);
+//		this.customTo.addSelectionListener(spinnerAdapter);
+//		this.customIncrement.addSelectionListener(spinnerAdapter);
 		
 		//--- Loop Range ---
-		MHeaderRangeStatus mHeaderRangeStatus = new MHeaderRangeStatus(this.simple,this.simpleLoop,this.custom);
+		MHeaderRangeStatus mHeaderRangeStatus = new MHeaderRangeStatus(/*this.simple,*/this.simpleLoop/*,this.custom*/);
 		
 		Group rangeGroup = new Group(radios, SWT.SHADOW_ETCHED_IN);
 		rangeGroup.setLayout(new GridLayout(2,false));
@@ -175,7 +175,7 @@ public class TransportModeAction extends Action {
 		mHeaderController.appendListener();
 		
 		simpleAdapter.update();
-		customAdapter.update();
+	//	customAdapter.update();
 		mHeaderRangeStatus.update();
 		// ------------------BUTTONS--------------------------
 		Composite buttons = new Composite(dialog, SWT.NONE);
@@ -229,14 +229,15 @@ public class TransportModeAction extends Action {
 	}
 	
 	protected void updateMode(MidiPlayerMode mode){
-		int type = (this.custom.getSelection())?MidiPlayerMode.TYPE_CUSTOM:MidiPlayerMode.TYPE_SIMPLE;
+	//	int type = (this.custom.getSelection())?MidiPlayerMode.TYPE_CUSTOM:MidiPlayerMode.TYPE_SIMPLE;
+		int type = MidiPlayerMode.TYPE_SIMPLE;
 		boolean loop = (type == MidiPlayerMode.TYPE_CUSTOM || (type == MidiPlayerMode.TYPE_SIMPLE && this.simpleLoop.getSelection()));
 		mode.setType(type);
 		mode.setLoop( loop );
 		mode.setSimplePercent( this.simplePercent.getSelectionIndex() >= 0?DEFAULT_PERCENTS[this.simplePercent.getSelectionIndex()]:MidiPlayerMode.DEFAULT_TEMPO_PERCENT);
-		mode.setCustomPercentFrom(this.customFrom.getSelection());
-		mode.setCustomPercentTo(this.customTo.getSelection());
-		mode.setCustomPercentIncrement(this.customIncrement.getSelection());
+//		mode.setCustomPercentFrom(this.customFrom.getSelection());
+//		mode.setCustomPercentTo(this.customTo.getSelection());
+//		mode.setCustomPercentIncrement(this.customIncrement.getSelection());
 		mode.setLoopSHeader( ( loop ? this.loopSHeader.getValue() : -1 ) );
 		mode.setLoopEHeader( ( loop ? this.loopEHeader.getValue() : -1 ) );
 		//mode.setLoopSHeader( ( loop && this.loopSHeader.getSelectionIndex() > 0 ? this.loopSHeader.getSelectionIndex() : -1 ) );
@@ -245,13 +246,13 @@ public class TransportModeAction extends Action {
 	}
 	
 	private class RadioSelectionAdapter extends SelectionAdapter{
-		private Button control;
+	//	private Button control;
 		private List controls;
 		
-		public RadioSelectionAdapter(Button control) {
+		public RadioSelectionAdapter(/*Button control*/) {
 			this.controls = new ArrayList();
-			this.control = control;
-			this.control.addSelectionListener(this);
+//			this.control = control;
+//			this.control.addSelectionListener(this);
 		}
 		
 		public void addControl(Control control){
@@ -259,7 +260,8 @@ public class TransportModeAction extends Action {
 		}
 		
 		public void update(){
-			boolean enabled = this.control.getSelection();
+		//	boolean enabled = this.control.getSelection();
+			boolean enabled = true;
 			Iterator it = this.controls.iterator();
 			while(it.hasNext()){
 				Control control = (Control)it.next();
@@ -273,55 +275,55 @@ public class TransportModeAction extends Action {
 		
 	}
 	
-	private class SpinnerSelectionAdapter extends SelectionAdapter{
-		private Spinner to;
-		private Spinner from;
-		private Spinner increment;
-		
-		public SpinnerSelectionAdapter(Spinner from,Spinner to, Spinner increment) {
-			this.from = from;
-			this.to = to;
-			this.increment = increment;
-		}
-		
-		public void widgetSelected(SelectionEvent e) {
-			if(e.widget.equals(this.from)){
-				if(this.from.getSelection() < MIN_SELECTION){
-					this.from.setSelection(MIN_SELECTION);
-				}else if(this.from.getSelection() >= this.to.getSelection()){
-					this.from.setSelection(this.to.getSelection() - 1);
-				}
-			}else if(e.widget.equals(this.to)){
-				if(this.to.getSelection() <= this.from.getSelection()){
-					this.to.setSelection(this.from.getSelection() + 1);
-				}else if(this.to.getSelection() > MAX_SELECTION){
-					this.to.setSelection(MAX_SELECTION);
-				}
-			}
-			if(this.increment.getSelection() > (this.to.getSelection() - this.from.getSelection())){
-				this.increment.setSelection(this.to.getSelection() - this.from.getSelection());
-			}
-		}
-	}
+//	private class SpinnerSelectionAdapter extends SelectionAdapter{
+//		private Spinner to;
+//		private Spinner from;
+//		private Spinner increment;
+//		
+//		public SpinnerSelectionAdapter(Spinner from,Spinner to, Spinner increment) {
+//			this.from = from;
+//			this.to = to;
+//			this.increment = increment;
+//		}
+//		
+//		public void widgetSelected(SelectionEvent e) {
+//			if(e.widget.equals(this.from)){
+//				if(this.from.getSelection() < MIN_SELECTION){
+//					this.from.setSelection(MIN_SELECTION);
+//				}else if(this.from.getSelection() >= this.to.getSelection()){
+//					this.from.setSelection(this.to.getSelection() - 1);
+//				}
+//			}else if(e.widget.equals(this.to)){
+//				if(this.to.getSelection() <= this.from.getSelection()){
+//					this.to.setSelection(this.from.getSelection() + 1);
+//				}else if(this.to.getSelection() > MAX_SELECTION){
+//					this.to.setSelection(MAX_SELECTION);
+//				}
+//			}
+//			if(this.increment.getSelection() > (this.to.getSelection() - this.from.getSelection())){
+//				this.increment.setSelection(this.to.getSelection() - this.from.getSelection());
+//			}
+//		}
+//	}
 	
 	private class MHeaderRangeStatus extends SelectionAdapter{
 		
 		private List controls;
 		private boolean enabled;
 		
-		private Button simpleMode;
+	//	private Button simpleMode;
 		private Button simpleLoop;
-		private Button customLoop;
+	//	private Button customLoop;
 		
-		public MHeaderRangeStatus(Button simpleMode, Button simpleLoop, Button customLoop) {
+		public MHeaderRangeStatus(/*Button simpleMode,*/ Button simpleLoop/*, Button customLoop   elkafouri*/) {
 			this.controls = new ArrayList();
 			this.enabled = false;
-			this.simpleMode = simpleMode;
+		//	this.simpleMode = simpleMode;
 			this.simpleLoop = simpleLoop;
-			this.customLoop = customLoop;
-			this.simpleMode.addSelectionListener(this);
+		//	this.customLoop = customLoop;
+		//	this.simpleMode.addSelectionListener(this);
 			this.simpleLoop.addSelectionListener(this);
-			this.customLoop.addSelectionListener(this);
+	//		this.customLoop.addSelectionListener(this);
 		}
 		
 		public void addControl(Control control){
@@ -330,12 +332,15 @@ public class TransportModeAction extends Action {
 		
 		public void update(){
 			// Check enabled
-			this.enabled = this.customLoop.getSelection();
-			if( !this.enabled ){
-				if( this.simpleMode.getSelection() ){
-					this.enabled = this.simpleLoop.getSelection();
-				}
-			}
+			// elkafoury
+//			this.enabled = this.customLoop.getSelection();
+//			if( !this.enabled ){
+//				if( this.simpleMode.getSelection() ){
+			this.enabled = this.simpleLoop.getSelection();
+//				}
+//			}
+
+ 
 			
 			// Update controls
 			Iterator it = this.controls.iterator();

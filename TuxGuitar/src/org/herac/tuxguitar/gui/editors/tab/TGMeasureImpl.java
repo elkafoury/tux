@@ -655,7 +655,7 @@ public class TGMeasureImpl extends TGMeasure{
 		Iterator it = getBeats().iterator();
 		while(it.hasNext()){
 			TGBeatImpl beat = (TGBeatImpl)it.next();
-			beat.paint(layout, painter, fromX + getHeaderImpl().getLeftSpacing(layout) ,fromY);
+			beat.paint(layout, painter, fromX + getHeaderImpl().getLeftSpacing(layout) ,fromY); // elkafoury added false /removed 
 		}
 	}
 	

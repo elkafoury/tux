@@ -150,15 +150,17 @@ public class TGConfigEditor{
 			select((Option)this.options.get(0));
 		}
 	}
-	
+	// elkafoury removed some unwanted options
 	private void initOptions(ToolBar toolBar,Composite parent){
 		this.options = new ArrayList();
-		this.options.add(new MainOption(this,toolBar,parent));
-		this.options.add(new StylesOption(this,toolBar,parent));
-		this.options.add(new LanguageOption(this,toolBar,parent));
+	 	this.options.add(new MainOption(this,toolBar,parent));
 		this.options.add(new ToolBarsOption(this,toolBar,parent));
-		this.options.add(new SkinOption(this,toolBar,parent));
 		this.options.add(new SoundOption(this,toolBar,parent));
+	//	this.options.add(new StylesOption(this,toolBar,parent));
+	//	this.options.add(new LanguageOption(this,toolBar,parent));
+
+	//	this.options.add(new SkinOption(this,toolBar,parent));
+
 		
 		Iterator it = this.options.iterator();
 		while(it.hasNext()){

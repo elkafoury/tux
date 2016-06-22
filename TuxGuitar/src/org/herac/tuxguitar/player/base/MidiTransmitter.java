@@ -28,7 +28,7 @@ public class MidiTransmitter {
 	public void sendNoteOn(int channel, int key, int velocity) throws MidiPlayerException {
 		for( int i = 0 ; i < this.receivers.size() ; i ++ ){
 			MidiReceiverItem receiver = (MidiReceiverItem) this.receivers.get( i );
-			receiver.getReceiver().sendNoteOn(channel, key, velocity);
+			receiver.getReceiver().sendNoteOn(channel, key, velocity);  // elkafoury here we are sending midi channel and midi note
 		}
 	}
 	

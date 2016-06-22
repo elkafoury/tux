@@ -56,6 +56,7 @@ public class TGResources {
 	private Color colorWhite;
 	private Color colorBlack;
 	private Color colorRed;
+	private Color colorBlue;
 	private Color caretColor1;
 	private Color caretColor2;
 	private Color loopSMarkerColor;
@@ -182,6 +183,10 @@ public class TGResources {
 		return this.colorRed;
 	}
 	
+	public Color getColorBlue() {
+		return this.colorBlue;
+	}
+	
 	public Color getCaretColor1() {
 		return this.caretColor1;
 	}
@@ -220,7 +225,7 @@ public class TGResources {
 	
 	public Image getScoreNote(int value,boolean playing) {
 		int index = 0;
-		index += ((playing)?1:0);
+		index += ((playing)?1:0);  // elkafoury was here 
 		index += ((value >= TGDuration.QUARTER)?2:0);
 		return this.scoreNotes[index];
 	}
@@ -270,6 +275,7 @@ public class TGResources {
 		this.colorWhite = TuxGuitar.instance().getDisplay().getSystemColor(SWT.COLOR_WHITE);
 		this.colorBlack = TuxGuitar.instance().getDisplay().getSystemColor(SWT.COLOR_BLACK);
 		this.colorRed = TuxGuitar.instance().getDisplay().getSystemColor(SWT.COLOR_RED);
+		this.colorBlue = TuxGuitar.instance().getDisplay().getSystemColor(SWT.COLOR_BLUE);
 	}
 	
 	private void initImages(){

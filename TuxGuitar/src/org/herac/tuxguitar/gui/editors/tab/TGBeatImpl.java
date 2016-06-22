@@ -159,6 +159,15 @@ public class TGBeatImpl extends TGBeat{
 		return (getMeasureImpl().isPlaying(layout) && TuxGuitar.instance().getEditorCache().isPlaying(getMeasure(),this));
 	}
 	
+	public boolean isThreadPlaying(ViewLayout layout){
+		return (TuxGuitar.instance().getPlayer().isRunning());
+		
+	}
+	
+	public TuxGuitar getTuxInstance(){
+		return (TuxGuitar.instance() );
+		
+	}
 	public TGVoiceImpl getVoiceImpl(int index){
 		TGVoice voice = super.getVoice(index);
 		if(voice instanceof TGVoiceImpl){
@@ -274,18 +283,22 @@ public class TGBeatImpl extends TGBeat{
 					for( int v = 0; v < countVoices(); v ++){
 						notes.addAll( getVoice(v).getNotes() );
 					}
-					TuxGuitar.instance().getPlayer().playBeat(getMeasure().getTrack(),notes);
+					TuxGuitar.instance().getPlayer().playBeat(getMeasure().getTrack(),notes);// elkafoury play midi  note when you edit
 				}
 			}).start();
 		}
 	}
 	
-	public void paint(ViewLayout layout,TGPainter painter, int fromX, int fromY/*,boolean playMode*/) {
+	public void paint(ViewLayout layout,TGPainter painter, int fromX, int fromY) { // elkafoury adeded playmode
+	
+		
 		if(!layout.isPlayModeEnabled() && (layout.getStyle() & ViewLayout.DISPLAY_SCORE) != 0 ){
 			paintExtraLines(painter, layout,fromX, fromY);
 		}
 		for(int v = 0; v < TGBeat.MAX_VOICES; v ++){
-			getVoiceImpl(v).paint(layout, painter, fromX, fromY);
+			getVoiceImpl(v).paint(layout, painter, fromX, fromY); // elkafoury step 2
+			
+		 	
 		}
 		if(!layout.isPlayModeEnabled()){
 			if(isChordBeat()){

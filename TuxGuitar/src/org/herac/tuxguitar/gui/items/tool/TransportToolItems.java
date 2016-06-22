@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.ToolItem;
 import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.actions.transport.TransportPlayAction;
 import org.herac.tuxguitar.gui.actions.transport.TransportStopAction;
+import org.herac.tuxguitar.gui.actions.transport.TransportModeAction;
 import org.herac.tuxguitar.gui.items.ToolItems;
 /**
  * @author julian
@@ -34,6 +35,7 @@ public class TransportToolItems  extends ToolItems{
 	private ToolItem next;
 	private ToolItem stop;
 	private ToolItem play;
+	private ToolItem mode;
 	private int status;
 	
 	public TransportToolItems(){
@@ -74,6 +76,9 @@ public class TransportToolItems  extends ToolItems{
 				TuxGuitar.instance().getTransport().gotoLast();
 			}
 		});
+		// elkafoury add the mode item
+		this.mode = new ToolItem(toolBar,SWT.PUSH);
+		this.mode.addSelectionListener(TuxGuitar.instance().getAction(TransportModeAction.NAME));
 		
 		this.status = STATUS_STOPPED;
 		this.loadIcons();
@@ -91,6 +96,8 @@ public class TransportToolItems  extends ToolItems{
 		this.last.setToolTipText(TuxGuitar.getProperty("transport.last"));
 		this.previous.setToolTipText(TuxGuitar.getProperty("transport.previous"));
 		this.next.setToolTipText(TuxGuitar.getProperty("transport.next"));
+		//elkafoury added the mode
+		this.mode.setToolTipText(TuxGuitar.getProperty("transport.mode"));
 	}
 	
 	public void loadIcons(){
@@ -117,6 +124,7 @@ public class TransportToolItems  extends ToolItems{
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPause());
 				this.play.setToolTipText(TuxGuitar.getProperty("transport.pause"));
+				this.mode.setImage(TuxGuitar.instance().getIconManager().getTransportMode());
 			}else if(this.status == STATUS_PAUSED){
 				this.first.setImage(TuxGuitar.instance().getIconManager().getTransportIconFirst2());
 				this.last.setImage(TuxGuitar.instance().getIconManager().getTransportIconLast2());
@@ -125,6 +133,7 @@ public class TransportToolItems  extends ToolItems{
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop2());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay2());
 				this.play.setToolTipText(TuxGuitar.getProperty("transport.start"));
+				this.mode.setImage(TuxGuitar.instance().getIconManager().getTransportMode());
 			}else if(this.status == STATUS_STOPPED){
 				this.first.setImage(TuxGuitar.instance().getIconManager().getTransportIconFirst1());
 				this.last.setImage(TuxGuitar.instance().getIconManager().getTransportIconLast1());
@@ -133,6 +142,7 @@ public class TransportToolItems  extends ToolItems{
 				this.stop.setImage(TuxGuitar.instance().getIconManager().getTransportIconStop1());
 				this.play.setImage(TuxGuitar.instance().getIconManager().getTransportIconPlay1());
 				this.play.setToolTipText(TuxGuitar.getProperty("transport.start"));
+				this.mode.setImage(TuxGuitar.instance().getIconManager().getTransportMode());
 			}
 		}
 		

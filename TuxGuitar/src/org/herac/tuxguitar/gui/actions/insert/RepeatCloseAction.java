@@ -56,7 +56,9 @@ public class RepeatCloseAction extends Action{
 			
 			int currentRepeatClose = measure.getRepeatClose();
 			if (currentRepeatClose < 1) {
-				currentRepeatClose = 1;
+			// elkafoury change default value of repitition to 5
+				//	currentRepeatClose = 1;
+				currentRepeatClose = 5;
 			}
 			
 			Group group = new Group(dialog,SWT.SHADOW_ETCHED_IN);

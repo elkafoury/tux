@@ -165,6 +165,7 @@ public class MidiSequenceParser {
 					addTempo(sequence,measure, previous,move);
 					addMetronome(sequence,measure.getHeader(),move);
 				}
+				
 				//agrego los pulsos
 				makeBeats(sequence, track, measure,index, move);
 				
@@ -204,8 +205,14 @@ public class MidiSequenceParser {
 					long duration = applyStrokeDuration(note, getRealNoteDuration(track, note, tempo, data.getDuration(), measureIdx,bIndex), stroke);
 					
 					int velocity = getRealVelocity(note, track, measureIdx, bIndex);
-					int channel = track.getChannel().getChannel();
-					int effectChannel = track.getChannel().getEffectChannel();
+				// elkafoury changed this note.getString() - 1
+				//	int channel = track.getChannel().getChannel();
+				//	int effectChannel = track.getChannel().getEffectChannel();
+					
+					int channel = note.getString() - 1+10;
+					int effectChannel = note.getString() - 1+10;
+					
+					
 					
 					boolean percussionTrack = track.isPercussionTrack();
 					//---Fade In---
@@ -225,6 +232,7 @@ public class MidiSequenceParser {
 							start += graceLength;
 							duration -= graceLength;
 						}
+						
 						makeNote(sequence,trackId, graceKey,start - graceLength,graceDuration,graceVelocity,channel);
 						
 					}
@@ -321,6 +329,7 @@ public class MidiSequenceParser {
 	/**
 	 * Crea una nota en la posicion start
 	 */
+	//elkafoury change the call to this channel with the  note.getString() - 1
 	private void makeNote(MidiSequenceHandler sequence,int track, int key, long start, long duration, int velocity, int channel) {
 		sequence.addNoteOn(getTick(start),track,channel,fix(key),fix(velocity));
 		sequence.addNoteOff(getTick(start + duration),track,channel,fix(key),fix(velocity));

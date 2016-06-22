@@ -145,6 +145,7 @@ import org.herac.tuxguitar.gui.actions.transport.TransportSetLoopEHeaderAction;
 import org.herac.tuxguitar.gui.actions.transport.TransportSetLoopSHeaderAction;
 import org.herac.tuxguitar.gui.actions.transport.TransportStopAction;
 import org.herac.tuxguitar.gui.actions.view.ShowFretBoardAction;
+import org.herac.tuxguitar.gui.actions.view.ShowTGTableAction; //elkafoury
 import org.herac.tuxguitar.gui.actions.view.ShowMatrixAction;
 import org.herac.tuxguitar.gui.actions.view.ShowMixerAction;
 import org.herac.tuxguitar.gui.actions.view.ShowPianoAction;
@@ -199,6 +200,7 @@ public class ActionManager {
 		
 		//view actions
 		addAction(new ShowFretBoardAction());
+		addAction(new ShowTGTableAction());
 		addAction(new ShowPianoAction());
 		addAction(new ShowMixerAction());
 		addAction(new ShowTransportAction());

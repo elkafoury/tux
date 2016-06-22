@@ -1,7 +1,7 @@
 package org.herac.tuxguitar.gui.editors.tab;
 
 import java.util.Iterator;
-
+import java.util.List;
 import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.editors.TGPainter;
 import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
@@ -348,11 +348,48 @@ public class TGVoiceImpl extends TGVoice{
 				paintSilence(layout, painter, fromX, fromY);
 			}
 			else{
-				Iterator notes = getNotes().iterator();
-				while (notes.hasNext()) {
-					TGNoteImpl note = (TGNoteImpl)notes.next();
-					note.paint(layout,painter,fromX ,fromY);
+ //				Iterator notes = getNotes().iterator();
+//				while (notes.hasNext()) {
+//					TGNoteImpl note = (TGNoteImpl)notes.next();
+//				
+//			 //(note.getPosX()==note2.getPosX()) 
+//					note.paint(layout,painter,fromX ,fromY,   true         );
+//					
+//					TGNoteImpl note2 =  notes.hasNext() ?  (TGNoteImpl)notes.next() : note;
+//					
+//
+//					
+//					
+//					
+//					
+//				}
+				
+				
+// 				List<TGNoteImpl> n = getNotes();
+//				for (TGNoteImpl note : n){
+//					
+//					
+//				}
+				
+				List n = getNotes();
+				TGNoteImpl note ;
+				int noOfNotes;
+				boolean firstNote;
+				for (int i = 0; i < n.size(); i++) {
+					  note = (TGNoteImpl)n.get(i);     
+						noOfNotes=n.size() ;
+						if ((noOfNotes>1||noOfNotes==1)&& i==0)
+						{
+							firstNote=true;
+							}else{
+							firstNote=false;
+						}
+						
+					note.paint(layout,painter,fromX ,fromY,   firstNote  );
 				}
+				
+				
+				
 				if(!layout.isPlayModeEnabled()){
 					paintBeat(layout, painter, fromX, fromY) ;
 				}

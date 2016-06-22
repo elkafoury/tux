@@ -22,7 +22,8 @@ import org.herac.tuxguitar.gui.system.config.TGConfigEditor;
 import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 
 public class StylesOption extends Option{
-	private static final int BUTTON_WIDTH = 200;
+	// elkafoury width button test 1
+	private static final int BUTTON_WIDTH = 100;
 	private static final int BUTTON_HEIGHT = 0;
 	
 	protected boolean initialized;

@@ -255,7 +255,7 @@ public abstract class ViewLayout {
 			measure.paintMeasure(this,painter);
 		}
 		//pinto el pulso
-		beat.paint(this,painter,measure.getPosX()  + measure.getHeaderImpl().getLeftSpacing(this), measure.getPosY());
+		beat.paint(this,painter,measure.getPosX()  + measure.getHeaderImpl().getLeftSpacing(this), measure.getPosY());// elkafoury step 1 this line removes the note coloring on play but keeps the measure
 		
 		//pinto los lyrics
 		((TGLyricImpl)measure.getTrackImpl().getLyrics()).paintCurrentNoteBeats(painter,this,measure,measure.getPosX(), measure.getPosY());

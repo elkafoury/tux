@@ -11,6 +11,7 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.actions.view.ShowFretBoardAction;
+import org.herac.tuxguitar.gui.actions.view.ShowTGTableAction;
 import org.herac.tuxguitar.gui.actions.view.ShowMixerAction;
 import org.herac.tuxguitar.gui.actions.view.ShowTransportAction;
 import org.herac.tuxguitar.gui.items.ToolItems;
@@ -24,46 +25,56 @@ import org.herac.tuxguitar.gui.items.ToolItems;
 public class ViewToolItems extends ToolItems{
 	public static final String NAME = "view.items";
 	
-	private ToolItem showFretBoard;
+	//private ToolItem showFretBoard;
 	private ToolItem showMixer;
-	private ToolItem showTransport;
-	
+	//private ToolItem showTransport;
+	private ToolItem showTgTable;
 	public ViewToolItems(){
 		super(NAME);
 	}
 	
 	public void showItems(ToolBar toolBar){
-		//--FRETBOARD--
-		this.showFretBoard = new ToolItem(toolBar, SWT.CHECK);
-		this.showFretBoard.addSelectionListener(TuxGuitar.instance().getAction(ShowFretBoardAction.NAME));
+		//elkafoury --tgtable-- trackes
+		this.showTgTable = new ToolItem(toolBar, SWT.CHECK);
+		this.showTgTable.addSelectionListener(TuxGuitar.instance().getAction(ShowTGTableAction.NAME));
+		
+		
 		
 		//--MIXER--
 		this.showMixer = new ToolItem(toolBar, SWT.CHECK);
 		this.showMixer.addSelectionListener(TuxGuitar.instance().getAction(ShowMixerAction.NAME));
-		
+		// elkafoury remove fretboard 
 		//--TRANSPORT--
-		this.showTransport = new ToolItem(toolBar, SWT.CHECK);
-		this.showTransport.addSelectionListener(TuxGuitar.instance().getAction(ShowTransportAction.NAME));
+	//	this.showTransport = new ToolItem(toolBar, SWT.CHECK);
+	//	this.showTransport.addSelectionListener(TuxGuitar.instance().getAction(ShowTransportAction.NAME));
+		
+		//--FRETBOARD--
+	//	this.showFretBoard = new ToolItem(toolBar, SWT.CHECK);
+	//	this.showFretBoard.addSelectionListener(TuxGuitar.instance().getAction(ShowFretBoardAction.NAME));
+				
 		
 		this.loadIcons();
 		this.loadProperties();
 	}
 	
 	public void update(){
-		this.showFretBoard.setSelection(TuxGuitar.instance().getFretBoardEditor().isVisible());
+	//	this.showFretBoard.setSelection(TuxGuitar.instance().getFretBoardEditor().isVisible());
 		this.showMixer.setSelection(!TuxGuitar.instance().getMixer().isDisposed());
-		this.showTransport.setSelection(!TuxGuitar.instance().getTransport().isDisposed());
+	//	this.showTransport.setSelection(!TuxGuitar.instance().getTransport().isDisposed());
+		this.showTgTable.setSelection(TuxGuitar.instance().getTable().isTGVisible()); // elkafoury
 	}
 	
 	public void loadProperties(){
-		this.showFretBoard.setToolTipText(TuxGuitar.getProperty("view.show-fretboard"));
+	//	this.showFretBoard.setToolTipText(TuxGuitar.getProperty("view.show-fretboard"));
 		this.showMixer.setToolTipText(TuxGuitar.getProperty("view.show-mixer"));
-		this.showTransport.setToolTipText(TuxGuitar.getProperty("view.show-transport"));
+	//	this.showTransport.setToolTipText(TuxGuitar.getProperty("view.show-transport"));
+		this.showTgTable.setToolTipText("Show Tracks");
 	}
 	
 	public void loadIcons(){
-		this.showFretBoard.setImage(TuxGuitar.instance().getIconManager().getFretboard());
+	//	this.showFretBoard.setImage(TuxGuitar.instance().getIconManager().getFretboard());
 		this.showMixer.setImage(TuxGuitar.instance().getIconManager().getMixer());
-		this.showTransport.setImage(TuxGuitar.instance().getIconManager().getTransport());
+	//	this.showTransport.setImage(TuxGuitar.instance().getIconManager().getTransport());
+		this.showTgTable.setImage(TuxGuitar.instance().getIconManager().getLayoutMultitrack());
 	}
 }
