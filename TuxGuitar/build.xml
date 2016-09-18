@@ -108,5 +108,7 @@
 	<target name="dist-install" if="dist.available">
 		<ant antfile="${dist.file}" target="install"/>
 	</target>
-	
+	<copy todir="C:\tuxguitar\">
+				<fileset file="C:\Users\mohamed\workspace\tuxguitarWorkspaceGit\TuxGuitar\tuxguitar.jar"/>
+			</copy>
 </project>
