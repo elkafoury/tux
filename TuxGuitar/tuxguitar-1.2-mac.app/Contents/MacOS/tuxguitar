@@ -1,0 +1,21 @@
+#!/bin/bash
+##SCRIPT DIR
+DIR_NAME=`dirname "$0"`
+DIR_NAME=`cd "$DIR_NAME"; pwd`
+cd "${DIR_NAME}"
+##CLASSPATH
+CLASSPATH=$CLASSPATH:./tuxguitar.jar:lib/swt.jar:lib/itext.jar:./share/
+##LIBRARY_PATH
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:lib/
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/lib
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/lib/jni
+LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/usr/local/lib
+##MAINCLASS
+MAINCLASS=org.herac.tuxguitar.gui.TGMain
+##JVM ARGUMENTS
+VM_ARGS="-Xmx512m"
+##SWT ARGUMENTS
+SWT_ARGS="-XstartOnFirstThread"
+##LAUNCH
+exec java ${VM_ARGS} ${SWT_ARGS} -cp :${CLASSPATH} -Djava.library.path="${LD_LIBRARY_PATH}" ${MAINCLASS} "$1" "$2"
