@@ -10,9 +10,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Device;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.swt.widgets.Display;
 import org.herac.tuxguitar.gui.TuxGuitar;
 import org.herac.tuxguitar.gui.editors.TGPainter;
 import org.herac.tuxguitar.gui.editors.tab.layout.ViewLayout;
@@ -21,6 +24,7 @@ import org.herac.tuxguitar.gui.editors.tab.painters.TGKeySignaturePainter;
 import org.herac.tuxguitar.gui.editors.tab.painters.TGTempoPainter;
 import org.herac.tuxguitar.gui.editors.tab.painters.TGTripletFeelPainter;
 import org.herac.tuxguitar.gui.helper.SyncThread;
+import org.herac.tuxguitar.gui.system.config.TGConfigKeys;
 import org.herac.tuxguitar.player.base.MidiPlayerMode;
 import org.herac.tuxguitar.song.managers.TGSongManager;
 import org.herac.tuxguitar.song.models.TGBeat;
@@ -1066,15 +1070,55 @@ public class TGMeasureImpl extends TGMeasure{
 			// Don't uncomment "lineStyle" until be sure SWT bug has fixed.
 			// See bug: https://bugs.eclipse.org/bugs/show_bug.cgi?id=225725
 			//painter.setLineStyle(SWT.LINE_DASH);
-			painter.setLineWidth(1);
-			painter.initPath();
-			painter.setAntialias(false);
-			painter.addRectangle(getPosX() + (5f * scale),y1,width - (10f * scale),(y2 - y1));
-			painter.closePath();
+			
+			
+			
+			// fill instead of a solid border
+			 
+			painter.setAlpha(50);
+			//painter.setForeground(getColor(TGConfigKeys.COLOR_MEASURE));// 250,250,0
+			 
+
+			//	Device device = Display.getCurrent ();
+			//	Color col= new Color(device,250,250,0);
+			
+			
+		//	painter.setBackground(col);// 250,250,0
+			painter.setBackground(getColor(TGConfigKeys.COLOR_MEASURE));// 250,250,0
+
+			painter.fillRectangle(getPosX() + (int)(5f * scale),y1,width - (int)(10f * scale),(y2 - y1));
+			
+//Elkafoury here we are displaying the rectangle on the measure while playing 
+//			
+//			painter.setLineWidth(1);
+//			painter.initPath();
+//			painter.setAntialias(false);
+//		  	painter.addRectangle(getPosX() + (5f * scale),y1,width - (10f * scale),(y2 - y1));
+//			painter.closePath();
+//			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			//painter.setLineStyle(SWT.LINE_SOLID);
 		}
 	}
 	
+	private Color getColor(String key){
+		RGB rgb = TuxGuitar.instance().getConfig().getRGBConfigValue(key);
+		if(rgb == null){
+			rgb = new RGB(0,0,0);
+		}
+		Color color = new Color(TuxGuitar.instance().getDisplay(),rgb);
+		 
+		return color;
+	}
+
 	/**
 	 * Retorna true si se esta reproduciendo y la posicion del player esta en este compas.
 	 */

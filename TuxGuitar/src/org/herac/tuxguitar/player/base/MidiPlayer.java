@@ -529,7 +529,7 @@ public class MidiPlayer{
 			TGNote note = (TGNote)notes.get(i);
 			beat[i][0] = track.getOffset() + (note.getValue() + ((TGString)track.getStrings().get(note.getString() - 1)).getValue());
 			beat[i][1] = note.getVelocity();
-			beat[i][2] =note.getString() ;// elkafoury
+			beat[i][2] =note.getString() ;// elkafoury : force channel per string beat[i][2] will carry the string and will be used as the channel
 		}
 		playBeat(channel,program,volume,balance,chorus,reverb,phaser,tremolo,beat);
 	}
@@ -551,7 +551,7 @@ public class MidiPlayer{
 			for(int i = 0; i < beat.length; i ++){
 				getOutputTransmitter().sendNoteOn(
 						
-						// elkafoury
+						// elkafoury the first param is the channel here we are sending the string instead
 					//	channel
 						
 						beat[i][2]
@@ -564,7 +564,14 @@ public class MidiPlayer{
 			}
 			Thread.sleep(duration);
 			for(int i = 0; i < beat.length; i ++){
-				getOutputTransmitter().sendNoteOff(channel,beat[i][0], beat[i][1]);
+				// do we need to replace the channel here too? try it
+				getOutputTransmitter().sendNoteOff(
+						
+					//	channel
+						
+						beat[i][2]
+						
+						,beat[i][0], beat[i][1]);
 			}
 		} catch (Throwable throwable) {
 			throwable.printStackTrace();

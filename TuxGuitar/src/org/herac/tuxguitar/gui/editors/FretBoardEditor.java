@@ -34,17 +34,18 @@ public class FretBoardEditor implements TGRedrawListener, TGExternalBeatViewerLi
 	}
 	
 	public void showFretBoard(){
-//		this.visible = true;
-//		getFretBoard().setVisible(this.visible);
-//		TuxGuitar.instance().getEditorManager().addRedrawListener(this);
-//		TuxGuitar.instance().getEditorManager().addBeatViewerListener(this);
-//		TuxGuitar.instance().updateShellFooter(getFretBoard().getHeight(), 730,520);
-		
-		this.visible =false;
+		// elkafoury Show the keyboard again
+		this.visible = true;
 		getFretBoard().setVisible(this.visible);
 		TuxGuitar.instance().getEditorManager().addRedrawListener(this);
 		TuxGuitar.instance().getEditorManager().addBeatViewerListener(this);
 		TuxGuitar.instance().updateShellFooter(getFretBoard().getHeight(), 730,520);
+		
+//		this.visible =false;
+//		getFretBoard().setVisible(this.visible);
+//		TuxGuitar.instance().getEditorManager().addRedrawListener(this);
+//		TuxGuitar.instance().getEditorManager().addBeatViewerListener(this);
+//		TuxGuitar.instance().updateShellFooter(getFretBoard().getHeight(), 730,520);
 	}
 	
 	public void showFretBoard(Composite parent) {

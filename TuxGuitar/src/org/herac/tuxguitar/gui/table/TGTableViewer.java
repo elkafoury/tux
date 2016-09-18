@@ -282,6 +282,7 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 			this.selectedMeasure = 0;
 			this.updateHScroll();
 
+			
 			// elkafoury mute other tracks, play only the selected so light do not get mixed up.
 			TGSong song = TuxGuitar.instance().getSongManager().getSong();
 			int tracks = song.countTracks();
@@ -317,28 +318,6 @@ public class TGTableViewer implements TGRedrawListener, TGUpdateListener, Langua
 				this.updateTable();
 				int selectedTrack = measure.getTrack().getNumber();
 				int selectedMeasure = measure.getNumber();
-				
-				
-				
-
-
-
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-				
-			
 				if(this.selectedTrack != selectedTrack || this.selectedMeasure != selectedMeasure){
 					this.redrawRows(selectedTrack);
 					this.followHorizontalScroll(selectedMeasure);

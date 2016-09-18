@@ -25,7 +25,7 @@ import org.herac.tuxguitar.gui.items.ToolItems;
 public class ViewToolItems extends ToolItems{
 	public static final String NAME = "view.items";
 	
-	//private ToolItem showFretBoard;
+	private ToolItem showFretBoard;
 	private ToolItem showMixer;
 	//private ToolItem showTransport;
 	private ToolItem showTgTable;
@@ -49,8 +49,8 @@ public class ViewToolItems extends ToolItems{
 	//	this.showTransport.addSelectionListener(TuxGuitar.instance().getAction(ShowTransportAction.NAME));
 		
 		//--FRETBOARD--
-	//	this.showFretBoard = new ToolItem(toolBar, SWT.CHECK);
-	//	this.showFretBoard.addSelectionListener(TuxGuitar.instance().getAction(ShowFretBoardAction.NAME));
+		this.showFretBoard = new ToolItem(toolBar, SWT.CHECK);
+		this.showFretBoard.addSelectionListener(TuxGuitar.instance().getAction(ShowFretBoardAction.NAME));
 				
 		
 		this.loadIcons();
@@ -58,21 +58,21 @@ public class ViewToolItems extends ToolItems{
 	}
 	
 	public void update(){
-	//	this.showFretBoard.setSelection(TuxGuitar.instance().getFretBoardEditor().isVisible());
+	 	this.showFretBoard.setSelection(TuxGuitar.instance().getFretBoardEditor().isVisible());
 		this.showMixer.setSelection(!TuxGuitar.instance().getMixer().isDisposed());
 	//	this.showTransport.setSelection(!TuxGuitar.instance().getTransport().isDisposed());
 		this.showTgTable.setSelection(TuxGuitar.instance().getTable().isTGVisible()); // elkafoury
 	}
 	
 	public void loadProperties(){
-	//	this.showFretBoard.setToolTipText(TuxGuitar.getProperty("view.show-fretboard"));
+	 	this.showFretBoard.setToolTipText(TuxGuitar.getProperty("view.show-fretboard"));
 		this.showMixer.setToolTipText(TuxGuitar.getProperty("view.show-mixer"));
 	//	this.showTransport.setToolTipText(TuxGuitar.getProperty("view.show-transport"));
 		this.showTgTable.setToolTipText("Show Tracks");
 	}
 	
 	public void loadIcons(){
-	//	this.showFretBoard.setImage(TuxGuitar.instance().getIconManager().getFretboard());
+	 	this.showFretBoard.setImage(TuxGuitar.instance().getIconManager().getFretboard());
 		this.showMixer.setImage(TuxGuitar.instance().getIconManager().getMixer());
 	//	this.showTransport.setImage(TuxGuitar.instance().getIconManager().getTransport());
 		this.showTgTable.setImage(TuxGuitar.instance().getIconManager().getLayoutMultitrack());

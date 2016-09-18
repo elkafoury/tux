@@ -283,13 +283,14 @@ public class TGNoteImpl extends TGNote {
 		// getBeatImpl().isThreadPlaying(layout)
 		// painter.setBackground(layout.getResources().getColorWhite());
 		// painter.setForeground(layout.getResources().getColorBlack());
-		int yc = yfrom - 30;
-		int h = getMeasureImpl().getTs().getPosition(TGTrackSpacing.POSITION_TABLATURE);
+		int yc = yfrom -30;
+		int width=5;
+		int h = getMeasureImpl().getTs().getPosition(TGTrackSpacing.POSITION_BOTTOM);
 				if (playing && firstNote) {
-					this.imgCopy = painter.createImage(painter.createRectangle(x - 2, yc, 10, h));
+					this.imgCopy = painter.createImage(painter.createRectangle(x - 2, yc,width, h));
 					painter.copyArea(this.imgCopy, x - 2, yc);
 					painter.setAlpha(100);
-					painter.fillRectangle(x - 2, yc, 10, h);
+					painter.fillRectangle(x - 2, yc, width, h);
 					setIsPlayed(true);
 				} else if (this.getIsPlayed()) {
 					painter.drawImage(this.imgCopy, x - 2, yc);
@@ -420,7 +421,7 @@ public class TGNoteImpl extends TGNote {
 					}
 				}else{
 					//staccato
-					if (getEffect().isStaccato()) { 
+					if (getEffect().isStaccato()) {
 						int size = 3;
 						int sX = x + (layout.getResources().getScoreNoteWidth() / 2);
 						int sY = (fromY + getVoiceImpl().getBeatGroup().getMinNote().getScorePosY() + layout.getScoreLineSpacing()) + 2;

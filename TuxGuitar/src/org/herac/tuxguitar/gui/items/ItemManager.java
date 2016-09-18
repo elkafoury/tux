@@ -259,7 +259,7 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 		
 		this.loadedMenuItems.clear();
 		//elkafoury menu remove
-//		this.loadedMenuItems.add(new FileMenuItem(shell,this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new FileMenuItem(shell,this.menu, SWT.CASCADE));
 //		this.loadedMenuItems.add(new EditMenuItem(shell,this.menu, SWT.CASCADE));
 //		this.loadedMenuItems.add(new ViewMenuItem(shell,this.menu, SWT.CASCADE));
 //		this.loadedMenuItems.add(new CompositionMenuItem(shell,this.menu, SWT.CASCADE));
@@ -268,7 +268,7 @@ public class ItemManager implements TGUpdateListener,IconLoader,LanguageLoader{
 //		this.loadedMenuItems.add(new BeatMenuItem(shell,this.menu, SWT.CASCADE));
 //		this.loadedMenuItems.add(new MarkerMenuItem(shell,this.menu, SWT.CASCADE));
 //		this.loadedMenuItems.add(new TransportMenuItem(shell,this.menu, SWT.CASCADE));
-//		this.loadedMenuItems.add(new ToolMenuItem(shell,this.menu, SWT.CASCADE));
+		this.loadedMenuItems.add(new ToolMenuItem(shell,this.menu, SWT.CASCADE));
 //		this.loadedMenuItems.add(new HelpMenuItem(shell,this.menu, SWT.CASCADE));
 		// elkafoury remove the menu
 	 	this.showMenuItems(this.loadedMenuItems);
