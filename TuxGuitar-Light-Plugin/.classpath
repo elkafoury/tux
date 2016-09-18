@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="tuxguitar-guitarduino.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/TuxGuitar"/>
+	<classpathentry kind="lib" path="/TuxGuitar/lib/swt.jar"/>
+	<classpathentry kind="lib" path="/TuxGuitar/lib/ch.ntb.usb-0.5.9.jar"/>
+	<classpathentry kind="lib" path="/TuxGuitar/lib/java-jack-0.1-FULL.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

@@ -1,0 +1,6 @@
+== TuxGuitar Light Plugin ==
+
+Plugin to interface Tuxguitar with GuitarDuino and FretLight led guitars.
+
+This work is derivated from 
+https://github.com/CrearAyT/Guitarra-Vas-a-Llorar/tree/master/TuxGuitar-Duino
